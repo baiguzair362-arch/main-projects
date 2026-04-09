@@ -1,3 +1,4 @@
+
 let Todos = [];
 let todoinp = document.getElementById("todoinp");
 let child2 = document.getElementById("child2");
@@ -12,7 +13,7 @@ if(getlocalstoragedata !== null) {
     // console.log(parsedata);
 Todos = parsedata;
 //working on DOM
-for(let i=0; i < Todos.length; i++) {
+for(let i=0; i < Todos.length; i++) {    
 let divelm = document.createElement("div");
 divelm.className = "box";
 child2.appendChild(divelm);
@@ -64,27 +65,32 @@ divelm.appendChild(donebtn);
 donebtn.onclick = function () {
     Todos[i].iscomplete = true;
     divelm.style.backgroundColor = "lightgreen";
+    notdonebtn.style.display = "inline"
     donebtn.style.display = "none";
-localStorage.setItem("Todos",JSON.stringify(Todos));    
+    localStorage.setItem("Todos",JSON.stringify(Todos));    
+    }
 //working on not done button
 let notdonebtn = document.createElement("button");
 notdonebtn.innerText = "NotDone";
 divelm.appendChild(notdonebtn);
 notdonebtn.className = "notdonebtn"
+notdonebtn.style.display = "none"
 notdonebtn.onclick = function () {
      Todos[i].iscomplete = false;
      divelm.style.backgroundColor = "white";
      donebtn.style.display = "inline";
      notdonebtn.style.display = "none";
 localStorage.setItem("Todos",JSON.stringify(Todos));    
-}}
+}
+if(Todos[i].iscomplete === true) {
+    divelm.style.backgroundColor = "lightgreen";
+    donebtn.style.display = "none";
+    notdonebtn.style.display = "inline";
+}
 
 }   }
 }
 getData();
-
-
-
 
 //working on adding and temporary function
 function add() {
